@@ -1,0 +1,7 @@
+{
+  "alias": "heap-backend",
+  "env": {
+    "TMDB_API_KEY": "@tmdb",
+    "IGDB_API_KEY": "@igdb"
+  }
+}

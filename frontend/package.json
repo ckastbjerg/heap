@@ -1,0 +1,41 @@
+{
+  "name": "heap",
+  "desciprion": "The entertainment dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.16.1",
+    "firebase": "^4.0.0",
+    "moment": "^2.18.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-feather": "^1.0.4",
+    "react-firebase": "^2.2.6",
+    "react-router-dom": "^4.1.1",
+    "reset-css": "^2.2.1",
+    "serve": "^6.4.8",
+    "styled-components": "^2.0.0",
+    "styled-media-query": "^2.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "now": "^9.1.0",
+    "onchange": "^3.3.0",
+    "prettier": "^1.10.2",
+    "pretty-quick": "^1.2.0",
+    "react-scripts": "1.0.10"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "now-start": "serve --single ./build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}",
+    "precommit": "pretty-quick --staged",
+    "dev": "concurrently \"yarn start\" \"yarn prettier-watch\"",
+    "deploy": "yarn now --public && yarn now alias"
+  }
+}
