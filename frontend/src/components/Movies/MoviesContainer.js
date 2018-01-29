@@ -13,17 +13,20 @@ const MoviesContainer = ({ movies, filter, media, ...rest }) => (
         {filter} {media}
       </Title>
     </Header>
-    <Search {...rest} />
+    <Search {...rest} media={media} />
     {movies && <Movies movies={movies} filter={filter} {...rest} />}
   </Module>
 );
 
-const mapFirebaseToProps = (props, ref) => ({
-  movies: 'movies/list',
-  add: movie => ref(`movies/list/${movie.id}`).set(movie),
-  remove: id => ref(`movies/list/${id}`).remove(),
-  archive: id => ref(`movies/list/${id}/archived`).set(true),
-  pin: id => ref(`movies/list/${id}/pinned`).set(true)
-});
+const mapFirebaseToProps = (props, ref) => {
+  const path = `users/${window.__uid__}/movies/list`;
+  return {
+    movies: path,
+    add: movie => ref(`${path}/${movie.id}`).set(movie),
+    remove: id => ref(`${path}/${id}`).remove(),
+    archive: id => ref(`${path}/${id}/archived`).set(true),
+    pin: id => ref(`${path}/${id}/pinned`).set(true)
+  };
+};
 
 export default connect(mapFirebaseToProps)(MoviesContainer);

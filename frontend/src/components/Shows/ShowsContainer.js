@@ -16,15 +16,18 @@ const ShowsContainer = ({ shows, ...rest }) => (
   </Module>
 );
 
-const mapFirebaseToProps = (props, ref) => ({
-  shows: 'shows/list',
-  add: show =>
-    ref(`shows/list/${show.id}`).set(
-      Object.assign({}, show, { dateUpdated: moment().toISOString() })
-    ),
-  remove: id => ref(`shows/list/${id}`).remove(),
-  archive: id => ref(`shows/list/${id}/latestEpisode/archived`).set(true),
-  pin: id => ref(`shows/list/${id}/pinned`).set(true)
-});
+const mapFirebaseToProps = (props, ref) => {
+  const path = `users/${window.__uid__}/shows/list`;
+  return {
+    shows: path,
+    add: show =>
+      ref(`${path}/${show.id}`).set(
+        Object.assign({}, show, { dateUpdated: moment().toISOString() })
+      ),
+    remove: id => ref(`${path}/${id}`).remove(),
+    archive: id => ref(`${path}/${id}/latestEpisode/archived`).set(true),
+    pin: id => ref(`${path}/${id}/pinned`).set(true)
+  };
+};
 
 export default connect(mapFirebaseToProps)(ShowsContainer);

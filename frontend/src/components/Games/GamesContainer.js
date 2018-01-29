@@ -16,12 +16,15 @@ const GamesContainer = ({ games, filter, ...rest }) => (
   </Module>
 );
 
-const mapFirebaseToProps = (props, ref) => ({
-  games: 'games/list',
-  add: game => ref(`games/list/${game.id}`).set(game),
-  remove: id => ref(`games/list/${id}`).remove(),
-  archive: id => ref(`games/list/${id}/archived`).set(true),
-  pin: id => ref(`games/list/${id}/pinned`).set(true)
-});
+const mapFirebaseToProps = (props, ref) => {
+  const path = `users/${window.__uid__}/games/list`;
+  return {
+    games: path,
+    add: game => ref(`${path}/${game.id}`).set(game),
+    remove: id => ref(`${path}/${id}`).remove(),
+    archive: id => ref(`${path}/${id}/archived`).set(true),
+    pin: id => ref(`${path}/${id}/pinned`).set(true)
+  };
+};
 
 export default connect(mapFirebaseToProps)(GamesContainer);
