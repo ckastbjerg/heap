@@ -1,6 +1,0 @@
-{
-  "alias": "heap",
-  "env": {
-    "REACT_APP_FIREBASE_API_KEY": "@firebase_apikey"
-  }
-}

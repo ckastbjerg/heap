@@ -7,7 +7,7 @@ import 'reset-css/reset.css';
 import './index.css';
 
 firebase.initializeApp({
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  apiKey: 'AIzaSyDq1qSJxZfeoJKU7L6OTs3IL27fD7I5d4Q',
   authDomain: 'heap-55c3a.firebaseapp.com',
   databaseURL: 'https://heap-55c3a.firebaseio.com',
   projectId: 'heap-55c3a',
