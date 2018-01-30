@@ -163,8 +163,8 @@ export const Select = styled.select`
 
 export const Tabs = styled.ul`
   display: flex;
-  height: 50px;
-  align-items: center;
+  height: 54px;
+  align-items: stretch;
 
   ${media.greaterThan('medium')`
     display: none;
@@ -174,13 +174,20 @@ export const Tabs = styled.ul`
 export const Tab = styled.li`
   flex: 1;
   cursor: pointer;
-  padding: ${baseSize}px;
+  padding: 10px;
   text-align: center;
-  color: ${props => (props.isActive ? color1 : borderColor)};
+  color: rgba(255, 255, 255, 0.75);
   line-height: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 2.5vw;
+  letter-spacing: 0.25vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:not(:last-child) {
-    border-right: 1px solid ${borderColorDiscreet};
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
   }
 `;
 

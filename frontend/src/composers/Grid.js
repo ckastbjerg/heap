@@ -11,7 +11,7 @@ const Grid = styled.div`
   overflow: scroll;
 
   ${media.lessThan('medium')`
-    height: calc(100% - 50px);
+    height: calc(100% - 54px);
   `};
 `;
 

@@ -2,20 +2,18 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import media from 'styled-media-query';
+import firebase from 'firebase';
 
 import { baseSize, borderColor, textColor } from '../../tokens';
 
 const Menu = styled.ul`
-  ${media.lessThan('medium')`
-    margin-top: ${baseSize}px;
-  `} ${media.greaterThan('medium')`
+  ${media.greaterThan('medium')`
     display: flex;
   `};
 `;
 
 const Item = styled.li`
   ${media.lessThan('medium')`
-    padding: ${baseSize}px;
     border-top: 1px solid ${borderColor};
   `} ${media.greaterThan('medium')`
     align-items: center;
@@ -36,6 +34,7 @@ const StyledLink = styled(NavLink)`
   padding: 7px 10px;
   border-radius: 3px;
   transition: 250ms;
+  display: block;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.075);
@@ -45,6 +44,10 @@ const StyledLink = styled(NavLink)`
     color: white;
     background-color: rgba(0, 0, 0, 0.075);
   }
+
+  ${media.lessThan('medium')`
+    padding: 14px;
+  `};
 `;
 
 export default ({ onNavigate }) => (
