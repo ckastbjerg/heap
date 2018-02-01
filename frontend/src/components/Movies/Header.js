@@ -2,24 +2,23 @@ import React from 'react';
 
 import { Title, Header as ModuleHeader, Select } from '../../composers/Module';
 
-function filterToLabel(filter) {
+function filterToLabel(filter, type) {
   if (filter === 'latest') {
-    return 'Unwatched episodes';
+    return `Unwatched ${type} movies`;
   } else if (filter === 'upcoming') {
-    return 'Upcoming episodes';
+    return `Upcoming ${type} movies`;
   } else if (filter === 'archived') {
-    return 'Watched episodes';
+    return `Watched ${type} movies`;
   } else if (filter === 'pinned') {
-    return 'Pinned shows';
+    return `Pinned ${type} movies`;
   }
 
   return filter;
 }
 
-const Header = ({ setFilter, setType, type, filter, showFilters }) => (
+const Header = ({ filter, setFilter, setType, showFilters, type }) => (
   <ModuleHeader>
-    {console.log(filter)}
-    <Title>{filterToLabel(filter)}</Title>
+    <Title>{filterToLabel(filter, type)}</Title>
     {showFilters && (
       <Select
         value={filter}

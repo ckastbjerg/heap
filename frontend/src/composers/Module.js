@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Check, Trash } from 'react-feather';
+import { Check, Trash, Filter, Clock } from 'react-feather';
 import media from 'styled-media-query';
 
 import {
@@ -144,7 +144,12 @@ const gearIcon = `
   </svg>
 `;
 
-export const Select = styled.select`
+const SelectWrapper = styled.div`
+  position: relative;
+  margin-left: ${baseSize}px;
+`;
+
+const StyledSelect = styled.select`
   -webkit-appearance: none;
   border: none;
   font-size: 16px;
@@ -153,13 +158,42 @@ export const Select = styled.select`
   cursor: pointer;
   width: 24px;
   height: 24px;
-  margin-left: ${baseSize}px;
   color: transparent;
-  background: url('data:image/svg+xml;utf8,${gearIcon}') no-repeat;
-  background-size: 22px;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: none;
 `;
+
+const SelectIcon = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ddd;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  select:hover + & {
+    color: ${textColor};
+  }
+`;
+
+export const Select = ({ children, type, ...rest }) => (
+  <SelectWrapper>
+    <StyledSelect {...rest}>{children}</StyledSelect>
+    {type === 'filter' && (
+      <SelectIcon>
+        <Clock />
+      </SelectIcon>
+    )}
+  </SelectWrapper>
+);
 
 export const Tabs = styled.ul`
   display: flex;

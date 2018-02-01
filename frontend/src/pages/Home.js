@@ -12,22 +12,26 @@ const Watch = ({ tab, onTabChange }) => (
   <Page>
     <Grid>
       <Row>
-        <Col isVisible={!tab || tab === 'movies'}>
-          <Movies media="movies" type="theatrical" filter="latest" />
+        <Col isVisible={!tab || tab === 'theatrical-movies'}>
+          <Movies showFilters media="movies" type="theatrical" />
         </Col>
-        <Col isVisible={!tab || tab === 'movies'}>
-          <Movies media="movies" type="digital" filter="latest" />
+        <Col isVisible={!tab || tab === 'digital-movies'}>
+          <Movies showFilters media="movies" type="digital" />
         </Col>
-        <Col isVisible={tab === 'shows'} filter="latest">
-          <Shows media="shows" filter="latest" />
+        <Col isVisible={tab === 'shows'}>
+          <Shows showFilters media="shows" />
         </Col>
-        <Col isVisible={tab === 'games'} filter="latest">
-          <Games media="games" filter="latest" />
+        <Col isVisible={tab === 'games'}>
+          <Games showFilters media="games" />
         </Col>
       </Row>
     </Grid>
     <Tabs>
-      <Tab name="Theatrical movies" tab={tab || 'movies'} onClick={onTabChange}>
+      <Tab
+        name="Theatrical movies"
+        tab={tab || 'theatrical-movies'}
+        onClick={onTabChange}
+      >
         Movies
       </Tab>
       <Tab name="Digital movies" tab={tab} onClick={onTabChange}>

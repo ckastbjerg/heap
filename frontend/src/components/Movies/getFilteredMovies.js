@@ -7,7 +7,6 @@ export const types = {
 
 export const filters = {
   archived: 'archived',
-  awaited: 'awaited',
   latest: 'latest',
   upcoming: 'upcoming',
   pinned: 'pinned'
@@ -30,22 +29,15 @@ export default function getFilteredMovies({ movies, type, filter }) {
       } else if (filterTime === filters.pinned) {
         return !!movie.pinned;
       } else if (filterTime === filters.upcoming) {
-        return (
-          !moment(date).isBefore(now) &&
-          !movie.archived &&
-          !movie.pinned &&
-          !!date
-        );
+        return !moment(date).isBefore(now) && !movie.archived && !movie.pinned;
       } else if (filterTime === filters.latest) {
         return moment(date).isBefore(now) && !movie.archived && !movie.pinned;
-      } else if (filterTime === filters.awaited) {
-        return !date && !movie.archived && !movie.pinned;
       }
 
       return undefined;
     });
 
-  if (filterTime === filters.awaited || filterTime === filters.archived) {
+  if (filterTime === filters.archived) {
     return data;
   } else if (filterTime === filters.latest) {
     return data.sort((a, b) => {

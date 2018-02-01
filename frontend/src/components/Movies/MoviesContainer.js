@@ -1,31 +1,30 @@
 import React from 'react';
 import { connect } from 'react-firebase';
 
-import Module, { Header, Title } from '../../composers/Module';
+import Module from '../../composers/Module';
 import Search from '../Search';
 
+import Header from './Header';
 import Movies from './Movies';
 
-const MoviesContainer = ({ movies, filter, media, ...rest }) => (
+const MoviesContainer = ({ movies, filter, ...rest }) => (
   <Module>
-    <Header>
-      <Title>
-        {filter} {media}
-      </Title>
-    </Header>
-    <Search {...rest} media={media} />
-    {movies && <Movies movies={movies} filter={filter} {...rest} />}
+    <Header filter={filter || 'latest'} {...rest} />
+    <Search filter={filter || 'latest'} {...rest} />
+    {movies && <Movies filter={filter || 'latest'} movies={movies} {...rest} />}
   </Module>
 );
 
 const mapFirebaseToProps = (props, ref) => {
-  const path = `users/${window.__uid__}/movies/list`;
+  const endpoint = `users/${window.__uid__}/movies`;
   return {
-    movies: path,
-    add: movie => ref(`${path}/${movie.id}`).set(movie),
-    remove: id => ref(`${path}/${id}`).remove(),
-    archive: id => ref(`${path}/${id}/archived`).set(true),
-    pin: id => ref(`${path}/${id}/pinned`).set(true)
+    movies: `${endpoint}/list`,
+    filter: props.filter || `${endpoint}/settings/filter`,
+    add: movie => ref(`${endpoint}/list/${movie.id}`).set(movie),
+    remove: id => ref(`${endpoint}/list/${id}`).remove(),
+    archive: id => ref(`${endpoint}/list/${id}/archived`).set(true),
+    pin: id => ref(`${endpoint}/list/${id}/pinned`).set(true),
+    setFilter: filter => ref(`${endpoint}/settings`).set({ filter })
   };
 };
 

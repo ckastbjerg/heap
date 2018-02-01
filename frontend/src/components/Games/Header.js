@@ -4,13 +4,13 @@ import { Title, Header as ModuleHeader, Select } from '../../composers/Module';
 
 function filterToLabel(filter) {
   if (filter === 'latest') {
-    return 'Unwatched episodes';
+    return `Unplayed games`;
   } else if (filter === 'upcoming') {
-    return 'Upcoming episodes';
+    return `Upcoming games`;
   } else if (filter === 'archived') {
-    return 'Watched episodes';
+    return `Played games`;
   } else if (filter === 'pinned') {
-    return 'Pinned shows';
+    return `Pinned games`;
   }
 
   return filter;
@@ -18,7 +18,6 @@ function filterToLabel(filter) {
 
 const Header = ({ setFilter, setType, type, filter, showFilters }) => (
   <ModuleHeader>
-    {console.log(filter)}
     <Title>{filterToLabel(filter)}</Title>
     {showFilters && (
       <Select
@@ -26,7 +25,7 @@ const Header = ({ setFilter, setType, type, filter, showFilters }) => (
         type="filter"
         onChange={e => setFilter(e.target.value)}
       >
-        <option value="archived">Watched</option>
+        <option value="archived">Played</option>
         <option value="latest">Latest</option>
         <option value="upcoming">Upcoming</option>
         <option value="stashed">Pinned</option>

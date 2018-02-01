@@ -13,13 +13,13 @@ const Watch = ({ tab, onTabChange }) => (
         <Col isVisible={!tab || tab === 'movies'}>
           <Movies media="movies" type="digital" filter="latest" />
         </Col>
-        <Col isVisible={tab === 'shows'}>
+        <Col isVisible={tab === 'upcoming'}>
           <Movies media="movies" type="digital" filter="upcoming" />
         </Col>
-        <Col isVisible={tab === 'games'}>
-          <Movies media="movies" type="digital" filter="awaited" />
+        <Col isVisible={tab === 'watched'}>
+          <Movies media="movies" type="digital" filter="archived" />
         </Col>
-        <Col isVisible={tab === 'games'}>
+        <Col isVisible={tab === 'pinned'}>
           <Movies media="movies" type="digital" filter="pinned" />
         </Col>
       </Row>
@@ -31,8 +31,8 @@ const Watch = ({ tab, onTabChange }) => (
       <Tab name="upcoming" tab={tab} onClick={onTabChange}>
         Upcoming
       </Tab>
-      <Tab name="awaited" tab={tab} onClick={onTabChange}>
-        Awaited
+      <Tab name="watched" tab={tab} onClick={onTabChange}>
+        Watched
       </Tab>
       <Tab name="pinned" tab={tab} onClick={onTabChange}>
         Pinned

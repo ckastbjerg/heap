@@ -16,8 +16,8 @@ const GamesPage = ({ tab, onTabChange }) => (
         <Col isVisible={tab === 'upcoming'}>
           <Games media="games" filter="upcoming" />
         </Col>
-        <Col isVisible={tab === 'awaited'}>
-          <Games media="games" filter="awaited" />
+        <Col isVisible={tab === 'archived'}>
+          <Games media="games" filter="archived" />
         </Col>
         <Col isVisible={tab === 'pinned'}>
           <Games media="games" filter="pinned" />
@@ -31,8 +31,8 @@ const GamesPage = ({ tab, onTabChange }) => (
       <Tab name="upcoming" tab={tab} onClick={onTabChange}>
         Upcoming
       </Tab>
-      <Tab name="awaited" tab={tab} onClick={onTabChange}>
-        Awaited
+      <Tab name="archived" tab={tab} onClick={onTabChange}>
+        Played
       </Tab>
       <Tab name="pinned" tab={tab} onClick={onTabChange}>
         Pinned

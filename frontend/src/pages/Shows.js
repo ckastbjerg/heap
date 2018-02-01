@@ -16,8 +16,8 @@ const ShowsPage = ({ tab, onTabChange }) => (
         <Col isVisible={tab === 'upcoming'}>
           <Shows media="shows" filter="upcoming" />
         </Col>
-        <Col isVisible={tab === 'awaited'}>
-          <Shows media="shows" filter="awaited" />
+        <Col isVisible={tab === 'archived'}>
+          <Shows media="shows" filter="archived" />
         </Col>
         <Col isVisible={tab === 'pinned'}>
           <Shows media="shows" filter="pinned" />
@@ -31,8 +31,8 @@ const ShowsPage = ({ tab, onTabChange }) => (
       <Tab name="upcoming" tab={tab} onClick={onTabChange}>
         Upcoming
       </Tab>
-      <Tab name="awaited" tab={tab} onClick={onTabChange}>
-        Awaited
+      <Tab name="archived" tab={tab} onClick={onTabChange}>
+        Archived
       </Tab>
       <Tab name="pinned" tab={tab} onClick={onTabChange}>
         Pinned

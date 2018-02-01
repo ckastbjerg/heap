@@ -4,12 +4,9 @@ export const filters = {
   archived: 'archived',
   latest: 'latestEpisode',
   upcoming: 'upcomingEpisode',
-  awaited: 'awaited',
   pinned: 'pinned'
 };
 
-const getAwaitedShows = shows =>
-  shows.filter(show => !show.latestEpisode && !show.upcomingEpisode);
 const getPinnedShows = shows => shows.filter(show => !!show.pinned);
 const getArchivedShows = shows => shows.filter(show => !!show.archived);
 const getLatestEpisodes = shows =>
@@ -50,9 +47,7 @@ export default function getFilteredShows({ shows, filter }) {
   const showsWithAirDates = getShowsWithAirDates(filterTime, showsArray);
   let result;
 
-  if (filterTime === filters.awaited) {
-    result = getAwaitedShows(showsArray);
-  } else if (filterTime === filters.pinned) {
+  if (filterTime === filters.pinned) {
     result = getPinnedShows(showsWithAirDates);
   } else if (filterTime === filters.archived) {
     result = getArchivedShows(showsWithAirDates);

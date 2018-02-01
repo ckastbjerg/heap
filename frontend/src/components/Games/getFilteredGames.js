@@ -4,11 +4,9 @@ const filters = {
   archived: 'archived',
   latest: 'latest',
   upcoming: 'upcoming',
-  awaited: 'awaited',
   pinned: 'pinned'
 };
 
-const getAwaitedGames = games => games.filter(game => !game.releaseDate);
 const getPinnedGames = games =>
   games.filter(game => !!game.pinned && !game.archived);
 const getArchivedGames = games => games.filter(game => !!game.archived);
@@ -23,7 +21,6 @@ const getLatestGames = games =>
 const getUpcomingGames = games =>
   games.filter(
     game =>
-      !!game.releaseDate &&
       !game.archived &&
       !game.pinned &&
       !moment(game.releaseDate).isBefore(moment())
@@ -39,9 +36,7 @@ const sortGames = (games, filter) =>
 export default function getFilteredGames({ games, filter }) {
   let gamesArray = Object.keys(games).map(key => games[key]);
 
-  if (filter === filters.awaited) {
-    return getAwaitedGames(gamesArray);
-  } else if (filter === filters.pinned) {
+  if (filter === filters.pinned) {
     gamesArray = getPinnedGames(gamesArray);
   } else if (filter === filters.archived) {
     gamesArray = getArchivedGames(gamesArray);
