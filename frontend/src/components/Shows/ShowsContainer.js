@@ -1,10 +1,12 @@
 import React from 'react';
-import { connect } from 'react-firebase';
-import moment from 'moment';
+import flow from 'lodash.flow';
+import { connect as connectFirebase } from 'react-firebase';
+import { connect as connectStore } from 'unistore/react';
+
+import Module from '../../composers/Module';
+import getAddObject from '../../utils/getAddObject';
 
 import Search from '../Search';
-import Module from '../../composers/Module';
-
 import Header from './Header';
 import Shows from './Shows';
 
@@ -16,15 +18,11 @@ const ShowsContainer = ({ shows, filter, ...rest }) => (
   </Module>
 );
 
-const mapFirebaseToProps = (props, ref) => {
-  const endpoint = `users/${window.__uid__}/shows`;
+const mapFirebaseToProps = ({ user, viewAsUid, filter }, ref) => {
+  const endpoint = `users/${user.uid}/shows`;
   return {
-    shows: `${endpoint}/list`,
-    filter: props.filter || `${endpoint}/settings/filter`,
-    add: show =>
-      ref(`${endpoint}/list/${show.id}`).set(
-        Object.assign({}, show, { dateUpdated: moment().toISOString() })
-      ),
+    shows: `users/${viewAsUid || user.uid}/shows/list`,
+    add: show => ref(`${endpoint}/list/${show.id}`).set(getAddObject(show)),
     remove: id => ref(`${endpoint}/list/${id}`).remove(),
     archive: id =>
       ref(`${endpoint}/list/${id}/latestEpisode/archived`).set(true),
@@ -33,4 +31,7 @@ const mapFirebaseToProps = (props, ref) => {
   };
 };
 
-export default connect(mapFirebaseToProps)(ShowsContainer);
+export default flow(
+  connectFirebase(mapFirebaseToProps),
+  connectStore(['user', 'viewAsUid'])
+)(ShowsContainer);

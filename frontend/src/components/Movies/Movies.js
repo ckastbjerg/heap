@@ -53,6 +53,8 @@ class Items extends Component {
       dateCountryCode: movie[type] && movie[type].countryCode,
       url: movie.url,
       backgroundImage: movie.backgroundImage,
+      viewAsUid: this.props.viewAsUid,
+      onAdd: () => this.props.add(movie),
       onArchive: () => this.props.archive(movie.id),
       onPin: () => this.props.pin(movie.id),
       onDelete: () => this.props.remove(movie.id)

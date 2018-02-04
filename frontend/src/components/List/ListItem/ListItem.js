@@ -18,7 +18,14 @@ import {
   Title,
   Top
 } from './ListItemElements';
-import { Star, CheckCircle, MinusCircle, MapPin, Heart } from 'react-feather';
+import {
+  Star,
+  CheckCircle,
+  MinusCircle,
+  PlusCircle,
+  MapPin,
+  Heart
+} from 'react-feather';
 
 const countryCodeToEmoji = {
   DK: '🇩🇰',
@@ -33,9 +40,11 @@ const ListItem = ({
   dateCountryCode,
   isUpdated,
   url,
+  onAdd,
   onArchive,
   onDelete,
-  onPin
+  onPin,
+  viewAsUid
 }) => (
   <Root>
     <BackgroundImage src={backgroundImage} />
@@ -57,20 +66,29 @@ const ListItem = ({
       </Bottom>
     </Meta>
     {isUpdated && <Badge>Updated</Badge>}
-    <Actions>
-      <Action>
-        <MapPin title="Save for later" onClick={onPin} size="20" />
-      </Action>
-      <Action>
-        <Heart size="20" />
-      </Action>
-      <Action>
-        <CheckCircle title="Archive" onClick={onArchive} size="20" />
-      </Action>
-      <Action>
-        <MinusCircle title="Delete" onClick={onDelete} size="20" />
-      </Action>
-    </Actions>
+    {!viewAsUid && (
+      <Actions>
+        <Action>
+          <MapPin title="Save for later" onClick={onPin} size="20" />
+        </Action>
+        <Action>
+          <Heart size="20" />
+        </Action>
+        <Action>
+          <CheckCircle title="Archive" onClick={onArchive} size="20" />
+        </Action>
+        <Action>
+          <MinusCircle title="Delete" onClick={onDelete} size="20" />
+        </Action>
+      </Actions>
+    )}
+    {viewAsUid && (
+      <Actions>
+        <Action>
+          <PlusCircle title="Add" onClick={onAdd} size="20" />
+        </Action>
+      </Actions>
+    )}
   </Root>
 );
 

@@ -18,10 +18,7 @@ const Item = styled.li`
   `} ${media.greaterThan('medium')`
     align-items: center;
     display: flex;
-
-    &:not(:last-child) {
-      margin-right: ${baseSize * 1}px;
-    }
+    margin-right: ${baseSize * 1}px;
   `};
 `;
 

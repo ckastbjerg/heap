@@ -51,6 +51,8 @@ class Items extends Component {
       date: game.releaseDate,
       url: game.url,
       backgroundImage: game.backgroundImage,
+      viewAsUid: this.props.viewAsUid,
+      onAdd: () => this.props.add(game),
       onArchive: () => this.props.archive(game.id),
       onDelete: () => this.props.remove(game.id),
       onPin: () => this.props.pin(game.id)

@@ -66,12 +66,14 @@ class Items extends Component {
         ? `(${show.episodeNumber}:${show.seasonNumber})`
         : '';
       return {
+        viewAsUid: this.props.viewAsUid,
         title: `${show.name} ${episodeInfo}`,
         date: show.airDate,
         backgroundImage: show.backgroundImage,
         rating: show.rating,
         url: show.url,
         id: show.id,
+        onAdd: () => this.props.add(show),
         onArchive: () => this.props.archive(show.id),
         onDelete: () => this.props.remove(show.id),
         onPin: () => this.props.pin(show.id)

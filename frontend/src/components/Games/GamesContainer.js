@@ -1,8 +1,10 @@
 import React from 'react';
-import { connect } from 'react-firebase';
+import flow from 'lodash.flow';
+import { connect as connectFirebase } from 'react-firebase';
+import { connect as connectStore } from 'unistore/react';
 
+import getAddObject from '../../utils/getAddObject';
 import Module, { Title } from '../../composers/Module';
-
 import Search from '../Search';
 
 import Header from './Header';
@@ -16,12 +18,11 @@ const GamesContainer = ({ games, filter, ...rest }) => (
   </Module>
 );
 
-const mapFirebaseToProps = (props, ref) => {
-  const endpoint = `users/${window.__uid__}/games`;
+const mapFirebaseToProps = ({ user, viewAsUid, filter }, ref) => {
+  const endpoint = `users/${user.uid}/games`;
   return {
-    games: `${endpoint}/list`,
-    filter: props.filter || `${endpoint}/settings/filter`,
-    add: game => ref(`${endpoint}/list/${game.id}`).set(game),
+    games: `users/${viewAsUid || user.uid}/games/list`,
+    add: game => ref(`${endpoint}/list/${game.id}`).set(getAddObject(game)),
     remove: id => ref(`${endpoint}/list/${id}`).remove(),
     archive: id => ref(`${endpoint}/list/${id}/archived`).set(true),
     pin: id => ref(`${endpoint}/list/${id}/pinned`).set(true),
@@ -29,4 +30,7 @@ const mapFirebaseToProps = (props, ref) => {
   };
 };
 
-export default connect(mapFirebaseToProps)(GamesContainer);
+export default flow(
+  connectFirebase(mapFirebaseToProps),
+  connectStore(['user', 'viewAsUid'])
+)(GamesContainer);

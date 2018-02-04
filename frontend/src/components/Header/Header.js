@@ -7,6 +7,7 @@ import { baseSize, headerHeight } from '../../tokens';
 
 import Logo from './Logo';
 import Menu from './Menu';
+import DropdownMenu from './DropdownMenu';
 
 const Root = styled.header`
   display: flex;
@@ -34,6 +35,13 @@ const Navigation = styled.div`
     margin-left: auto;
     justify-content: flex-end;
   `};
+`;
+
+const Avatar = styled.img`
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  filter: grayscale(1);
 `;
 
 const BurgerWrapper = styled.div`
@@ -65,6 +73,7 @@ class Header extends Component {
         <Navigation isOpen={this.state.isMenuOpen}>
           <Menu onNavigate={this.onClickBurger} />
         </Navigation>
+        <DropdownMenu {...this.props} />
       </Root>
     );
   }
