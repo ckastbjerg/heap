@@ -50,7 +50,9 @@ const ListItem = ({
     <BackgroundImage src={backgroundImage} />
     <Meta>
       <Top>
-        <Title href={url}>{title}</Title>
+        <Title href={url} target="_black" rel="noopener">
+          {title}
+        </Title>
       </Top>
       <Bottom>
         <Rating>

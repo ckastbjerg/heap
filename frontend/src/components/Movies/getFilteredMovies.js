@@ -19,7 +19,7 @@ export default function getFilteredMovies({ movies, type, filter }) {
   const data = Object.keys(movies)
     .map(key => {
       const movie = movies[key];
-      const date = movie[filterType];
+      const date = movie[filterType] || null;
       return { ...movie, date };
     })
     .filter(movie => {

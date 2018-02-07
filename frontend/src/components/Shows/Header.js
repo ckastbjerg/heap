@@ -18,7 +18,6 @@ function filterToLabel(filter) {
 
 const Header = ({ setFilter, setType, type, filter, showFilters }) => (
   <ModuleHeader>
-    {console.log(filter)}
     <Title>{filterToLabel(filter)}</Title>
     {showFilters && (
       <Select
