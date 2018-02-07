@@ -45,6 +45,9 @@ const Separator = styled.div`
 const ClearIcon = styled(XCircle)`
   cursor: pointer;
 `;
+const LogOutIcon = styled(LogOut)`
+  cursor: pointer;
+`;
 
 const Menu = props => {
   const {
@@ -94,7 +97,8 @@ const Menu = props => {
         <Friend key={friend.uid} {...friend} {...props} />
       ))}
       <Footer>
-        Logged in as {user.displayName} <LogOut size={16} onClick={onSignOut} />
+        Logged in as {user.displayName}{' '}
+        <LogOutIcon size={16} onClick={onSignOut} />
       </Footer>
     </Wrapper>
   );

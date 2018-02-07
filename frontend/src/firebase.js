@@ -27,8 +27,8 @@ export const signOut = () => firebase.auth().signOut();
 
 export default function init(onAuthChanged) {
   firebase.auth().onAuthStateChanged(profile => {
+    userData = profile;
     if (profile) {
-      userData = profile;
       user = db.ref(`users/${userData.uid}`);
       db.ref(`users/${userData.uid}`).update({
         displayName: userData.displayName.split(' ')[0],
@@ -52,7 +52,6 @@ export const addFriend = (store, { uid, displayName }) => {
 };
 
 export const acceptFriendRequest = (store, uid) => {
-  console.log(store, uid, userData.uid);
   const friend = db.ref(`users/${uid}`);
   user.child(`friends/${uid}/confirmed`).set(true);
   friend.child(`friends/${userData.uid}/confirmed`).set(true);
