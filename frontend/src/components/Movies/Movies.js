@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { postData } from '../../api';
 import { ENDPOINT } from '../../constants';
 import List from '../../components/List';
 import getItemsForUpdating from '../../utils/getItemsForUpdating';
@@ -31,7 +31,7 @@ class Items extends Component {
     const items = getItemsForUpdating({ fields, items: movies });
 
     if (items.length > 0) {
-      axios.post(`${ENDPOINT}/movies`, { items }).then(res => {
+      postData(`${ENDPOINT}/movies`, { items }).then(res => {
         res.data.forEach(movie => this.props.add(movie));
       });
     }

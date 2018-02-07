@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { postData } from '../../api';
 
 import { ENDPOINT } from '../../constants';
 import List from '../../components/List';
@@ -31,7 +31,7 @@ class Items extends Component {
       items: games
     });
     if (items.length > 0) {
-      axios.post(`${ENDPOINT}/games`, { items }).then(res => {
+      postData(`${ENDPOINT}/games`, { items }).then(res => {
         res.data.forEach(game => this.props.add(game));
       });
     }
