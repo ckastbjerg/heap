@@ -14,7 +14,7 @@ import { viewAsFriend } from '../../actions';
 const MoviesContainer = ({ movies, filter, ...rest }) => (
   <Module>
     <Header filter={filter || 'latest'} {...rest} />
-    <Search filter={filter || 'latest'} {...rest} />
+    {!rest.viewAsUid && <Search filter={filter || 'latest'} {...rest} />}
     {movies && <Movies filter={filter || 'latest'} movies={movies} {...rest} />}
   </Module>
 );

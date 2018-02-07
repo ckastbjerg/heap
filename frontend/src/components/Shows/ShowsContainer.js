@@ -13,7 +13,7 @@ import Shows from './Shows';
 const ShowsContainer = ({ shows, filter, ...rest }) => (
   <Module>
     <Header filter={filter || 'latest'} {...rest} />
-    <Search filter={filter || 'latest'} {...rest} />
+    {!rest.viewAsUid && <Search filter={filter || 'latest'} {...rest} />}
     {shows && <Shows shows={shows} filter={filter || 'latest'} {...rest} />}
   </Module>
 );

@@ -13,7 +13,7 @@ import Games from './Games';
 const GamesContainer = ({ games, filter, ...rest }) => (
   <Module>
     <Header filter={filter || 'latest'} {...rest} />
-    <Search filter={filter || 'latest'} {...rest} />
+    {!rest.viewAsUid && <Search filter={filter || 'latest'} {...rest} />}
     {games && <Games games={games} filter={filter || 'latest'} {...rest} />}
   </Module>
 );
