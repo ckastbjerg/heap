@@ -7,13 +7,11 @@ import { baseSize, headerHeight } from '../../tokens';
 
 import Logo from './Logo';
 import Menu from './Menu';
-import DropdownMenu from './DropdownMenu';
 
 const Root = styled.header`
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: ${headerHeight}px;
   padding: ${baseSize}px;
   justify-content: space-between;
@@ -38,10 +36,13 @@ const Navigation = styled.div`
 `;
 
 const Avatar = styled.img`
-  height: 28px;
-  width: 28px;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
   filter: grayscale(1);
+  cursor: pointer;
+  border: 2px solid
+    ${props => (props.isMenuOpen ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.1)')};
 `;
 
 const BurgerWrapper = styled.div`
@@ -73,7 +74,11 @@ class Header extends Component {
         <Navigation isOpen={this.state.isMenuOpen}>
           <Menu onNavigate={this.onClickBurger} />
         </Navigation>
-        <DropdownMenu {...this.props} />
+        <Avatar
+          isMenuOpen={this.props.isMenuOpen}
+          src={this.props.user.photoURL}
+          onClick={this.props.onToggleMenu}
+        />
       </Root>
     );
   }

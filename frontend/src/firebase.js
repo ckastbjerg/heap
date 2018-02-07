@@ -11,6 +11,11 @@ firebase.initializeApp({
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
+const db = firebase.database();
+
+let user;
+let userData;
+
 export const signIn = () => {
   firebase
     .auth()
@@ -21,14 +26,40 @@ export const signIn = () => {
 export const signOut = () => firebase.auth().signOut();
 
 export default function init(onAuthChanged) {
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      const db = firebase.database();
-      db.ref(`users/${user.uid}`).update({
-        displayName: user.displayName.split(' ')[0],
-        avatarUrl: user.photoURL
+  firebase.auth().onAuthStateChanged(profile => {
+    if (profile) {
+      userData = profile;
+      user = db.ref(`users/${userData.uid}`);
+      db.ref(`users/${userData.uid}`).update({
+        displayName: userData.displayName.split(' ')[0],
+        avatarUrl: userData.photoURL
       });
     }
-    onAuthChanged(user);
+    onAuthChanged(userData);
   });
 }
+
+const getFriendRequestData = ({ displayName }) => ({
+  displayName,
+  confirmed: false,
+  inviteSentBy: userData.uid
+});
+
+export const addFriend = (store, { uid, displayName }) => {
+  const friend = db.ref(`users/${uid}`);
+  user.child(`friends/${uid}`).set(getFriendRequestData({ displayName }));
+  friend.child(`friends/${userData.uid}`).set(getFriendRequestData(userData));
+};
+
+export const acceptFriendRequest = (store, uid) => {
+  console.log(store, uid, userData.uid);
+  const friend = db.ref(`users/${uid}`);
+  user.child(`friends/${uid}/confirmed`).set(true);
+  friend.child(`friends/${userData.uid}/confirmed`).set(true);
+};
+
+export const declineFriendRequest = (store, uid) => {
+  const friend = db.ref(`users/${uid}`);
+  user.child(`friends/${uid}`).remove();
+  friend.child(`friends/${userData.uid}`).remove();
+};
