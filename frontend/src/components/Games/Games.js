@@ -31,8 +31,8 @@ class Items extends Component {
       items: games
     });
     if (items.length > 0) {
-      postData(`${ENDPOINT}/games`, { items }).then(res => {
-        res.data.forEach(game => this.props.add(game));
+      postData(`${ENDPOINT}/games`, { items }).then(data => {
+        data.forEach(game => this.props.add(game));
       });
     }
   }

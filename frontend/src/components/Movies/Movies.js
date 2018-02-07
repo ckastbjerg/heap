@@ -31,8 +31,8 @@ class Items extends Component {
     const items = getItemsForUpdating({ fields, items: movies });
 
     if (items.length > 0) {
-      postData(`${ENDPOINT}/movies`, { items }).then(res => {
-        res.data.forEach(movie => this.props.add(movie));
+      postData(`${ENDPOINT}/movies`, { items }).then(data => {
+        data.forEach(movie => this.props.add(movie));
       });
     }
   }
