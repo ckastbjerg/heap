@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Fuse from 'fuse.js';
 import FriendSearchField from './FriendSearchField';
-import { Check, MinusCircle } from 'react-feather';
+import { PlusCircle, MinusCircle } from 'react-feather';
 
 import { baseSize, headerHeight } from '../../tokens';
 
@@ -22,7 +22,7 @@ const NameWrapper = styled.div`
 const Name = styled.div`
   font-weight: bold;
   font-size: 14px;
-  cursor: pointer;
+  cursor: ${props => (props.isPending ? 'default' : 'pointer')};
 
   span {
     font-weight: normal;
@@ -34,6 +34,7 @@ const Actions = styled.div`
 
   svg {
     cursor: pointer;
+    margin-left: 5px;
   }
 `;
 
@@ -48,11 +49,20 @@ const Friend = ({
 }) => (
   <FriendWrapper>
     <NameWrapper>
-      <Name onClick={() => onViewFriendProfile(uid)}>{displayName}</Name>
+      <Name
+        isPending={isInvite || isRequest}
+        onClick={() => {
+          if (!isInvite && !isRequest) {
+            onViewFriendProfile(uid);
+          }
+        }}
+      >
+        {displayName}
+      </Name>
     </NameWrapper>
     <Actions>
       {isRequest && (
-        <Check size="16" onClick={() => onAcceptFriendRequest(uid)} />
+        <PlusCircle size="16" onClick={() => onAcceptFriendRequest(uid)} />
       )}
       <MinusCircle size="16" onClick={() => onDeclineFriendRequest(uid)} />
     </Actions>
